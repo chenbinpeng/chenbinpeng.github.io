@@ -1,0 +1,662 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="结构," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="振动来源振动来源有两个，一个是自身，一个是外界。外界主要有风，或者碰撞等，这里不加考虑。自身主要有电机、桨、结构件之间的共振等。这里边，电机自身的振动并不大，但装上桨以后，由于拉力变大，如果桨的动平衡比较差，就会引入很大的振动。如果振动频率和结构件的固有频率重合，就会引起共振。此外，结构件之间的缝隙，也会使振动进一步放大。
+振动的影响
+降低飞机部件的寿命。严重时会导致机体散架。早期在diy自己的第">
+<meta property="og:type" content="article">
+<meta property="og:title" content="imu减振">
+<meta property="og:url" content="http://yoursite.com/2016/10/14/imu-vibration/index.html">
+<meta property="og:site_name" content="陈思录">
+<meta property="og:description" content="振动来源振动来源有两个，一个是自身，一个是外界。外界主要有风，或者碰撞等，这里不加考虑。自身主要有电机、桨、结构件之间的共振等。这里边，电机自身的振动并不大，但装上桨以后，由于拉力变大，如果桨的动平衡比较差，就会引入很大的振动。如果振动频率和结构件的固有频率重合，就会引起共振。此外，结构件之间的缝隙，也会使振动进一步放大。
+振动的影响
+降低飞机部件的寿命。严重时会导致机体散架。早期在diy自己的第">
+<meta property="og:image" content="http://yoursite.com/jzsq.jpg">
+<meta property="og:image" content="http://yoursite.com/jianzhenanzhuang.jpg">
+<meta property="og:image" content="http://yoursite.com/DJI-A2.jpg">
+<meta property="og:image" content="http://yoursite.com/Naza V1.jpg">
+<meta property="og:image" content="http://yoursite.com/pixhack.jpg">
+<meta property="og:image" content="http://yoursite.com/Zero-Xplorer.jpg">
+<meta property="og:image" content="http://yoursite.com/ppz-Imu_mount.jpg">
+<meta property="og:updated_time" content="2016-10-14T03:11:24.108Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="imu减振">
+<meta name="twitter:description" content="振动来源振动来源有两个，一个是自身，一个是外界。外界主要有风，或者碰撞等，这里不加考虑。自身主要有电机、桨、结构件之间的共振等。这里边，电机自身的振动并不大，但装上桨以后，由于拉力变大，如果桨的动平衡比较差，就会引入很大的振动。如果振动频率和结构件的固有频率重合，就会引起共振。此外，结构件之间的缝隙，也会使振动进一步放大。
+振动的影响
+降低飞机部件的寿命。严重时会导致机体散架。早期在diy自己的第">
+<meta name="twitter:image" content="http://yoursite.com/jzsq.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/14/imu-vibration/"/>
+
+  <title> imu减振 | 陈思录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">陈思录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Stay Foolish, Stay Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                imu减振
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-14T09:53:50+08:00" content="2016-10-14">
+              2016-10-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/14/imu-vibration/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/14/imu-vibration/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="振动来源"><a href="#振动来源" class="headerlink" title="振动来源"></a>振动来源</h3><p>振动来源有两个，一个是自身，一个是外界。外界主要有风，或者碰撞等，这里不加考虑。自身主要有电机、桨、结构件之间的共振等。这里边，电机自身的振动并不大，但装上桨以后，由于拉力变大，如果桨的动平衡比较差，就会引入很大的振动。如果振动频率和结构件的固有频率重合，就会引起共振。此外，结构件之间的缝隙，也会使振动进一步放大。</p>
+<h3 id="振动的影响"><a href="#振动的影响" class="headerlink" title="振动的影响"></a>振动的影响</h3><ul>
+<li>降低飞机部件的寿命。严重时会导致机体散架。早期在diy自己的第一架飞机时，由于没有经验，将桨面装反，振动很大，以至于将机架螺钉和压桨的螺母震掉，导致射桨和机架散架。</li>
+<li>给加速度、陀螺仪等传感器引入很多噪声和偏差，导致飞控姿态估计错误，飞机不能起飞或炸鸡。</li>
+<li>其它的影响，比如对于航拍的飞机，会导致拍照模糊、视频抖动等。</li>
+</ul>
+<h3 id="振动的抑制"><a href="#振动的抑制" class="headerlink" title="振动的抑制"></a>振动的抑制</h3><p>抑制振动的方式有两种，机械的和软件的。</p>
+<h4 id="机械方法"><a href="#机械方法" class="headerlink" title="机械方法"></a>机械方法</h4><p>首先，要从源头上抑制振动。电机要保证状态良好，转轴没有被摔弯。桨的动平衡要好。机臂硬度要高。各机械部件之间贴合要牢靠，不留缝隙等。</p>
+<p>然后再设计减振模块，使imu和机身隔离，进一步减弱振动。</p>
+<h5 id="机械减振原理。"><a href="#机械减振原理。" class="headerlink" title="机械减振原理。"></a>机械减振原理。</h5><p>减振模块的固有振动频率远离机身振动的频率，避免和减振模块共振，从而达到减振的效果。可以将减振模块看做一个受迫振动系统，机身振动作为驱动输入。当减振模块的固有频率和输入频率相同时，二者共振，振动被放大。当二者远离时，输入频率被抑制，相当于减振。</p>
+<h5 id="减振模块设计。"><a href="#减振模块设计。" class="headerlink" title="减振模块设计。"></a>减振模块设计。</h5><p>设减振模块的固有频率公式如下：<br>$$<br>f=\frac{1}{2\pi}\sqrt{\frac{k}{m}}<br>$$<br>其中，m为减振模块的质量。k为减震垫的劲度系数。设计减振模块，就是通过调整k和m，使f远离机身振动频率。具体为调整减振垫的硬度，给IMU加不同质量的配重块。</p>
+<p>设计好的减振模块并不容易。简单的加橡胶管或泡棉，有时候非但起不了减振的效果，反而会将振动放大。IMU模块越轻，减振越难，需要的减振垫要越小、越软。如果可能，最好将电池、飞控和所有其它可能的重量集中到一起来做减振。</p>
+<h5 id="减振模块种类"><a href="#减振模块种类" class="headerlink" title="减振模块种类"></a>减振模块种类</h5><p>目前市场上的减振模块主要有两大类，外部减振和内部减振。很多的开源飞控，如pixhawk，由于没有内置减振，所以需要添加额外的减振模块，见淘宝上的各种类型的减振神器。像大僵等商业飞控，都内置了减振结构。</p>
+<ul>
+<li>外部减振</li>
+</ul>
+<p>如下图所示，通常由上下两层板组成，一大一小。四个角由弹性材料连接，或橡皮筋或橡皮球。这种通常是将整个飞控模块装在上层板上。由于整个飞控通常重量比较大，这种方式还可行，一定程度上可以起到减振效果。之前自己diy的一架飞机就是采用的这种减振方式，效果还不错。</p>
+<p>​    <img src="jzsq.jpg" alt="jzsq"></p>
+<p>下面是另一个类似的减振模块及装上飞控后的效果。</p>
+<p> <img src="jianzhenanzhuang.jpg" alt="jianzhenanzhuang"></p>
+<ul>
+<li>内部减振</li>
+</ul>
+<p>像大僵这些公司的商用飞控，大多采用了内减振的方式。结构大体相似，IMU加上配重，上下有泡棉包裹。四轴由外壳固定。下图是大僵A2飞控的内部结构。</p>
+<p> <img src="DJI-A2.jpg" alt="DJI-A2"></p>
+<p>下面是大僵naza飞控的内部结构，</p>
+<p> <img src="Naza V1.jpg" alt="Naza V1"></p>
+<p>除此以外，国内一家公司改进pixhawk飞控，也采用了类似的方式。</p>
+<p> <img src="pixhack.jpg" alt="pixhack"></p>
+<p>零度将IMU单独拎出来做减振，除了体积小一点，结构大体类似，如下图。一个铜块配重，上下两层泡棉。外面用一个金属外壳固定。</p>
+<p> <img src="Zero-Xplorer.jpg" alt="Zero-Xplorer"></p>
+<p>下面是<a href="https://wiki.paparazziuav.org/wiki/Vibration" target="_blank" rel="external">ppz官网</a>介绍的一种减振结构。基本是用钢板将IMU模块夹在中间，四周用泡棉包裹，最外层用夹板固定。这里特别提到了减振材料为“latex foam rubber”时效果较好，是作者通过实验验证了的。还有就是泡棉要软、配重要大，尽可能的降低减振模块的固有频率。同时，泡棉IMU钢板模块和外部夹板之间的缝隙不能太大。大的运动，会增加加速度的噪声。大的转动，会增加陀螺仪的噪声。</p>
+<p>  <img src="ppz-Imu_mount.jpg" alt="ppz-Imu_mount"></p>
+<p>综合以上，内减震的结构大同小异。难点主要在于如何根据飞机的振动频率选择合适的配重和减振垫。以及结构间的配合和精密安装。</p>
+<h4 id="软件方法"><a href="#软件方法" class="headerlink" title="软件方法"></a>软件方法</h4><p>有时候，受大小和重量的限制，不可能随心所欲的设计机械减振结构，或者在振动比较大的时候，机械减振效果不佳。这个时候就需要考虑采用软件滤波。比如滑动平均滤波等。但软件滤波有一个缺点，就是会有延迟，这会影响姿态控制。通常，机械减振和软件滤波都会用到，已到达好的减振效果，但需要根据实际情况在二者之间做一个权衡，以满足设计要求。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/结构/" rel="tag">#结构</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/08/ECF/" rel="next" title="Mahony显式互补滤波">
+                <i class="fa fa-chevron-left"></i> Mahony显式互补滤波
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/14/imu-vibration/"
+           data-title="imu减振" data-url="http://yoursite.com/2016/10/14/imu-vibration/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="chenbinpeng" />
+          <p class="site-author-name" itemprop="name">chenbinpeng</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#振动来源"><span class="nav-number">1.</span> <span class="nav-text">振动来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#振动的影响"><span class="nav-number">2.</span> <span class="nav-text">振动的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#振动的抑制"><span class="nav-number">3.</span> <span class="nav-text">振动的抑制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#机械方法"><span class="nav-number">3.1.</span> <span class="nav-text">机械方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#机械减振原理。"><span class="nav-number">3.1.1.</span> <span class="nav-text">机械减振原理。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#减振模块设计。"><span class="nav-number">3.1.2.</span> <span class="nav-text">减振模块设计。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#减振模块种类"><span class="nav-number">3.1.3.</span> <span class="nav-text">减振模块种类</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#软件方法"><span class="nav-number">3.2.</span> <span class="nav-text">软件方法</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chenbinpeng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenbinpeng"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

@@ -121,6 +121,16 @@
 
 
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?c776fbdf48cacab663b4a9f6874466db";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
 
@@ -213,6 +223,247 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/20/旋转矩阵/" itemprop="url">
+                  旋转矩阵
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-20T17:12:52+08:00" content="2016-10-20">
+              2016-10-20
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/20/旋转矩阵/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/20/旋转矩阵/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>刚看飞控代码的时候，有遇到旋转矩阵。当时查了一些资料，还看了麻省理工学院Gilbert Strang教授的<a href="http://open.163.com/special/opencourse/daishu.html" target="_blank" rel="external">线性代数</a>公开课，差不多算是弄懂了。这两天在看四元数，里面涉及到旋转矩阵，回想一下，又变得模糊起来。所以打算重温一下，并记录下来，一方面可以加深印象，另一方面也方便日后查阅。</p>
+<h3 id="什么是旋转矩阵"><a href="#什么是旋转矩阵" class="headerlink" title="什么是旋转矩阵"></a>什么是旋转矩阵</h3><p>顾名思义，首先它是一个矩阵，由一堆数据放在一个中括号中组成。其次，它可以用来对向量做旋转变换，就是可以将向量从一个位置，旋转到另一个位置。</p>
+<h3 id="旋转变换的作用"><a href="#旋转变换的作用" class="headerlink" title="旋转变换的作用"></a>旋转变换的作用</h3><p>对向量做旋转变换，即，只改变向量的方向，不改变向量的大小。在飞控中，通常用于NED坐标和机身坐标之间进行坐标变换。</p>
+<p>可以从“信号与系统”的角度来进行理解。“信号”通过“系统”进行加工处理，然后输出。其幅值可能变大、变小，相位可能左移、右移等。“旋转矩阵”就相当于一个“系统”，只不过处理的对象不是“信号”，而是“向量”。处理的目的不是变大或变小，而是进行旋转，相当于相位左右移。也就是说向量和旋转矩阵相乘，得到的结果相当于原向量旋转某个角度。</p>
+<h3 id="旋转变换的原理"><a href="#旋转变换的原理" class="headerlink" title="旋转变换的原理"></a>旋转变换的原理</h3><h4 id="坐标转换"><a href="#坐标转换" class="headerlink" title="坐标转换"></a>坐标转换</h4><p>所谓坐标转换，就是一个参考坐标中的量用另一个参考坐标进行衡量时需要进行的调整。我们在说一个量时，都是有一个参考标准的。比如，“1米”是1/299792458秒的时间间隔内光在真空中行程的长度；“1秒”是铯133原子基态的两个超精细能阶间跃迁辐射振荡9,192,631,770个周期的持续时间；“1千克”是一个用铂（90％）铱（10％）合金制成的、直径和高度均为39毫米的圆柱体形状的重量。我们把这些称为标准。当参考标准改变时，对应的数量值要进行调整。比如，在另一个参考系中，以2/299792458秒的时间间隔内光在真空中行程的长度作为1米。那么标准参考系下的1米在这里则为0.5米。这其实就是坐标转换。</p>
+<p>其实，生活中我们也经常会遇到这样的情况。我们有多个长度单位，毫米、厘米、分米、米等等等等。当我们用不同的单位作为标准来衡量一个物体时，得出的结果也不相同。比如，用米来衡量时是1米，用厘米时则为100。究其原因，其实也就是参考坐标不同。只不过这里的坐标是一维的。但是我们可以求出厘米和米之间的转换关系，在二者之间进行转换。如下：<br>$$<br>x’=100*x<br>$$<br>其中，$x$的单位为m，也就是位于以m为单位的坐标系下。$x’$的单位为cm，也就是为以cm为单位的坐标系下。这个式子就实现了我们从m为单位的坐标向以cm为单位的坐标的转换。100就是对应的转换矩阵，只不过是一维的。</p>
+<p>一维中没有旋转，只有缩放。</p>
+<h4 id="向量空间"><a href="#向量空间" class="headerlink" title="向量空间"></a>向量空间</h4><p>就是一种参考坐标系中所有量的集合。比如一维坐标中，所有在坐标轴上的量都属于该一维向量空间。二维坐标则是所有坐标面上的量的集合。三维坐标则是立体空间中的量的集合。</p>
+<h4 id="向量的基"><a href="#向量的基" class="headerlink" title="向量的基"></a>向量的基</h4><p>说白了就是向量的参考标准。专业一点的叫，通过线性组合可以表示出所有向量空间中的量的最小向量组合。向量的基可以有很多。这也是为什么需要进行坐标转换的原因。</p>
+<p>仍以一维的长度举例。若以1mm为参考标准，由于$1\cdot{x}$可以覆盖坐标轴上的任何一个值，所以1mm可以作为一维长度向量空间的一个基。同理，$2\cdot{x}$也可以覆盖坐标轴，故2mm也可以作为一个基。</p>
+<p>二维空间，通常采用正交坐标轴上的单位向量作为基。也就是$[0,1]$和$[1,0]$，因为线性组合<br>$$<br>[x,y]=a\cdot[0,1]+b\cdot[1,0]<br>$$<br>可以表示二维平面中的任何一个向量。同理，$[1,1]$和$[1,0]$也可以，所以也可以作为一组基。</p>
+<p>推广至三维空间，我们习惯采用的基为$[1,0,0]$，$[0,1,0]$，$[0,0,1]$。仍有很多组其它基可以采用。</p>
+<h4 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h4><p>三维空间中，设旋转矩阵为$R$，被旋转向量为$\vec{v}=[x,y,z]$。</p>
+<p>$$<br>\begin{bmatrix}x’\y’\z’\end{bmatrix}=\begin{bmatrix}r<em>{00}&amp;r</em>{01}&amp;r<em>{02}\r</em>{10}&amp;r<em>{11}&amp;r</em>{12}\r<em>{20}&amp;r</em>{21}&amp;r_{22}\end{bmatrix}\cdot\begin{bmatrix}x\y\z\end{bmatrix}<br>$$</p>
+<p> 可能公式无法正常显示，补上图片：</p>
+<p><img src="f1.PNG" alt="f1"></p>
+<p>将旋转矩阵$R$的列向量看做三维向量的一组基。则上式可拆解为：<br>$$<br>\begin{bmatrix}x’\y’\z’\end{bmatrix}=\begin{bmatrix}r<em>{00}\r</em>{10}\r<em>{20}\end{bmatrix}\cdot{x}+\begin{bmatrix}r</em>{01}\r<em>{11}\r</em>{21}\end{bmatrix}\cdot{y}+\begin{bmatrix}r<em>{02}\r</em>{12}\r_{22}\end{bmatrix}\cdot{z}<br>$$<br>可能公式无法正常显示，补上图片：</p>
+<p> <img src="f2.PNG" alt="f2"></p>
+<p>等号右侧是三维向量基的线性组合。由于基的线性组合仍落在向量空间内。也就是说，在三维向量空间内，任何被旋转向量$[x,y,z]$，通过旋转矩阵的列向量和空间中的另一个向量$[x’,y’,z’]$相对应。旋转矩阵完成一次坐标转换。</p>
+<p>若使坐标转换的过程中，只改变向量的方向，不改变向量的大小。则可认为，向量完成了一次旋转。满足该条件的转换矩阵为旋转矩阵。旋转矩阵的列向量需满足单位正交。可以通过求上式等号两边的向量长度不变进行证明。</p>
+<h3 id="旋转矩阵的构造"><a href="#旋转矩阵的构造" class="headerlink" title="旋转矩阵的构造"></a>旋转矩阵的构造</h3><p>如何根据需要的旋转量构造对应的旋转矩阵？</p>
+<p>假设原坐标系的基为$B$，该基下变量的坐标为$\vec{v}$。另一个坐标系的基为$B’$，$B’$下的向量坐标为$\vec{v}’$。则有如下关系式：<br>$$<br>R\cdot{\vec{v}}=R’\cdot\vec{v}’<br>$$<br>从而有：<br>$$<br>\vec{v}’=R’^{-1}R\cdot{\vec{v}}<br>$$<br>若$R$为标准基，则：<br>$$<br>\vec{v}’=R’^{-1}\cdot{\vec{v}}<br>$$<br>也就是说，旋转向量为$R’^{-1}$。</p>
+<h3 id="旋转矩阵在飞控算法中的应用"><a href="#旋转矩阵在飞控算法中的应用" class="headerlink" title="旋转矩阵在飞控算法中的应用"></a>旋转矩阵在飞控算法中的应用</h3><p>飞控算法中经常需要在NED坐标和机身坐标之间进行转换。这种转换就是通过旋转矩阵来实现的。具体为，根据加速度和磁传感器，确定NED坐标，坐标基归一化为标准正交基。然后通过姿态解算，实时维护一个机身坐标和NED坐标之间的旋转矩阵。这样当需要进行坐标转换时，只需乘以旋转矩阵或旋转矩阵的逆即可。又由于旋转矩阵单位正交，旋转矩阵的逆可以通过转置很方便的得到。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>所以理解旋转矩阵的关键点是了解到旋转矩阵的本质是坐标变换，是不同参考系下不同的参考标准造成的。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/17/大风歌/" itemprop="url">
+                  大风歌
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-17T10:30:50+08:00" content="2016-10-17">
+              2016-10-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/17/大风歌/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/17/大风歌/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>地铁到公司有一段距离，两公里左右。为了锻炼身体，一直坚持走路。单程二十分钟，来回四十。为了打发时间，听了下王立群教授讲的大风歌。前几天刚刚听完。一直想写点啥，但一方面是这两天工作比较忙，周末一直在加班赶意大利客户的小飞机样机，没来得及。另一方面也实在没酝酿好写什么。趁着今天休息，记录一下。首先以大风歌作为开头:</p>
+<p>大风起兮云飞扬<br>威加海内兮归故乡<br>安得猛士兮守四方</p>
+<p>给我的第一感觉就是浑宏大气。除此以外，还有短小精炼，通俗易懂，朗朗上口。很容易被记住。结合刘邦的一生，会发现它的内涵还很丰富。实在是属于上上乘的佳作。所以一直被广泛流传至今。</p>
+<p>但心中也忍不住有一个疑问。印象中，模模糊糊的觉得，刘邦不善文。从他对儒生的轻蔑态度中就可见一斑。可他又是怎样想出来大风歌的呢？</p>
+<p>也许那根本就不是想出来的，而是有感而发，自然天成。是特定的经历和情景催生出来的。网上有一篇评论，题目叫做“无心作诗成绝唱”，我觉得总结的非常好。好的作品仅靠技术是不够的，没有内容，只能是无病呻吟。而无心之作，恰能真实反映内心，即便缺了技术，仍然魅力无穷。</p>
+<p>大风歌是刘邦推翻暴秦，建立大汉后，在平叛完黥布叛乱，衣锦还乡时所做。大风起兮云飞扬，描述了秦末陈胜吴广揭竿而起后，天下大乱，风起云涌的社会形势。正是在这样的情况下，刘邦被簇拥着走上了反秦的道路。和天下的英杰一起推翻了暴秦。然后又打败项羽，安定关中，统一天下，建立了大汉，从而威加海内。但事情并没有结束，新建的大汉并不稳固。自己封的诸侯王纷纷造反，使得自己对大汉的前途感到了深深的忧虑。所以发出了安得猛士兮守四方的感慨。</p>
+<p>虽然只有短短的三句，却精准的反映了自己的内心，高度概括了自己的一生。</p>
+<p>从最后一句可以知道，他希望自己建立的大汉稳固长存。比较感兴趣的是，发出这句感慨的时候他在想些什么。像始皇帝一样，使刘姓江山传至万代吗？从彭城战败，逃跑时丢掉孩子，感觉对这件事儿看的应该不这么重。为了天下不再分裂，百姓不再受战乱之苦?很难想象他有这么高尚。实在令人难以捉摸。</p>
+<p>和如今到处都在讲情怀不同。刘邦没有喊什么高尚的口号，顶多也就是个约法三章。人生中也有不少被人诟病的污点，彭城战败，丢妻弃儿，鸿沟议和，不顾父亲的生死，大汉初立，诛杀功臣。被很多人称为流氓，小人。但却在大是大非面前从不含糊。丰西泽纵徒，约法三章，休养生息，轻徭薄赋。表现出了大仁，大义，大爱。</p>
+<p>人无完人。很多的时候不得不做出无奈的取舍。我想，刘邦不是不爱自己的妻儿，父亲。从大汉建立后他对父亲的态度可以看出，从他对废立太子犹豫不决可以看出。</p>
+<p>鸿鹄高飞，一举千里<br>羽翮已就，横绝四海<br>横绝四海，当可奈何<br>虽有矰缴，尚安所施</p>
+<p>这不禁让我想起了项羽。项羽是个大英雄。力拔山兮气盖世，抗击暴秦。坦坦荡荡，鸿门宴不杀刘邦。热爱自己的家乡。四面楚歌之时，无颜去见江东父老。不忘自己的女人，宝马。</p>
+<p>力拔山兮气盖世<br>时不利兮骓不逝<br>骓不逝兮可奈何<br>虞兮虞兮奈若何</p>
+<p>选择不同，结果不同。也许很多人想看到一个刘邦和项羽优点互补的完人。但不幸的是，很多选项是互斥的。只能选择其一。</p>
+<p>一个念着“虞兮虞兮”的人，和自己心爱的女人相伴而终。</p>
+<p>一个满脑子想着如何“守四方”的人，坐拥着天下离去。</p>
+<p>这就是命。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -825,7 +1076,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -835,7 +1086,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1026,6 +1277,9 @@
   
 
   
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
 
 </body>
 </html>

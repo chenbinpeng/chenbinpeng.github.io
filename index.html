@@ -309,12 +309,8 @@
 <p>二维空间，通常采用正交坐标轴上的单位向量作为基。也就是$[0,1]$和$[1,0]$，因为线性组合<br>$$<br>[x,y]=a\cdot[0,1]+b\cdot[1,0]<br>$$<br>可以表示二维平面中的任何一个向量。同理，$[1,1]$和$[1,0]$也可以，所以也可以作为一组基。</p>
 <p>推广至三维空间，我们习惯采用的基为$[1,0,0]$，$[0,1,0]$，$[0,0,1]$。仍有很多组其它基可以采用。</p>
 <h4 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h4><p>三维空间中，设旋转矩阵为$R$，被旋转向量为$\vec{v}=[x,y,z]$。</p>
-<p>$$<br>\begin{bmatrix}x’\y’\z’\end{bmatrix}=\begin{bmatrix}r<em>{00}&amp;r</em>{01}&amp;r<em>{02}\r</em>{10}&amp;r<em>{11}&amp;r</em>{12}\r<em>{20}&amp;r</em>{21}&amp;r_{22}\end{bmatrix}\cdot\begin{bmatrix}x\y\z\end{bmatrix}<br>$$</p>
-<p> 可能公式无法正常显示，补上图片：</p>
-<p><img src="f1.PNG" alt="f1"></p>
-<p>将旋转矩阵$R$的列向量看做三维向量的一组基。则上式可拆解为：<br>$$<br>\begin{bmatrix}x’\y’\z’\end{bmatrix}=\begin{bmatrix}r<em>{00}\r</em>{10}\r<em>{20}\end{bmatrix}\cdot{x}+\begin{bmatrix}r</em>{01}\r<em>{11}\r</em>{21}\end{bmatrix}\cdot{y}+\begin{bmatrix}r<em>{02}\r</em>{12}\r_{22}\end{bmatrix}\cdot{z}<br>$$<br>可能公式无法正常显示，补上图片：</p>
-<p> <img src="f2.PNG" alt="f2"></p>
-<p>等号右侧是三维向量基的线性组合。由于基的线性组合仍落在向量空间内。也就是说，在三维向量空间内，任何被旋转向量$[x,y,z]$，通过旋转矩阵的列向量和空间中的另一个向量$[x’,y’,z’]$相对应。旋转矩阵完成一次坐标转换。</p>
+<p>$$<br>\begin{bmatrix}x’\\y’\\z’\end{bmatrix}=\begin{bmatrix}r_{00}&amp;r_{01}&amp;r_{02}\\r_{10}&amp;r_{11}&amp;r_{12}\\r_{20}&amp;r_{21}&amp;r_{22}\end{bmatrix}\cdot\begin{bmatrix}x\\y\\z\end{bmatrix}<br>$$</p>
+<p>将旋转矩阵$R$的列向量看做三维向量的一组基。则上式可拆解为：<br>$$<br>\begin{bmatrix}x’\\y’\\z’\end{bmatrix}=\begin{bmatrix}r_{00}\\r_{10}\\r_{20}\end{bmatrix}\cdot{x}+\begin{bmatrix}r_{01}\\r_{11}\\r_{21}\end{bmatrix}\cdot{y}+\begin{bmatrix}r_{02}\\r_{12}\\r_{22}\end{bmatrix}\cdot{z}<br>$$<br>等号右侧是三维向量基的线性组合。由于基的线性组合仍落在向量空间内。也就是说，在三维向量空间内，任何被旋转向量$[x,y,z]$，通过旋转矩阵的列向量和空间中的另一个向量$[x’,y’,z’]$相对应。旋转矩阵完成一次坐标转换。</p>
 <p>若使坐标转换的过程中，只改变向量的方向，不改变向量的大小。则可认为，向量完成了一次旋转。满足该条件的转换矩阵为旋转矩阵。旋转矩阵的列向量需满足单位正交。可以通过求上式等号两边的向量长度不变进行证明。</p>
 <h3 id="旋转矩阵的构造"><a href="#旋转矩阵的构造" class="headerlink" title="旋转矩阵的构造"></a>旋转矩阵的构造</h3><p>如何根据需要的旋转量构造对应的旋转矩阵？</p>
 <p>假设原坐标系的基为$B$，该基下变量的坐标为$\vec{v}$。另一个坐标系的基为$B’$，$B’$下的向量坐标为$\vec{v}’$。则有如下关系式：<br>$$<br>R\cdot{\vec{v}}=R’\cdot\vec{v}’<br>$$<br>从而有：<br>$$<br>\vec{v}’=R’^{-1}R\cdot{\vec{v}}<br>$$<br>若$R$为标准基，则：<br>$$<br>\vec{v}’=R’^{-1}\cdot{\vec{v}}<br>$$<br>也就是说，旋转向量为$R’^{-1}$。</p>

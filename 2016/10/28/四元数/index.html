@@ -1,0 +1,663 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数学," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="四元数的引入一切都要从数系的扩充开始。人们最开始使用数字，是从正整数开始，也就是1,2,3……。因为它符合人们的思维习惯，简单，容易理解。0这个我们看似理所当然的数字，也是中世纪以后才引入的。后来又引入了负数、分数、无理数。但这些数字都没有跳出实数轴，是一维的。在当时人们的观念里$x^2\ge0$，但随着实践的进一步加深，在解方程的过程中发现了$x^2=-1$这么一个怪物。起初人们不理解，认为这样">
+<meta property="og:type" content="article">
+<meta property="og:title" content="四元数">
+<meta property="og:url" content="http://yoursite.com/2016/10/28/四元数/index.html">
+<meta property="og:site_name" content="陈思录">
+<meta property="og:description" content="四元数的引入一切都要从数系的扩充开始。人们最开始使用数字，是从正整数开始，也就是1,2,3……。因为它符合人们的思维习惯，简单，容易理解。0这个我们看似理所当然的数字，也是中世纪以后才引入的。后来又引入了负数、分数、无理数。但这些数字都没有跳出实数轴，是一维的。在当时人们的观念里$x^2\ge0$，但随着实践的进一步加深，在解方程的过程中发现了$x^2=-1$这么一个怪物。起初人们不理解，认为这样">
+<meta property="og:image" content="http://yoursite.com/complex-rotation.png">
+<meta property="og:image" content="http://yoursite.com/rotating_a_vector_about_an_arbitrary_axis.png">
+<meta property="og:image" content="http://yoursite.com/maths-rotation.png">
+<meta property="og:updated_time" content="2016-10-28T08:25:53.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="四元数">
+<meta name="twitter:description" content="四元数的引入一切都要从数系的扩充开始。人们最开始使用数字，是从正整数开始，也就是1,2,3……。因为它符合人们的思维习惯，简单，容易理解。0这个我们看似理所当然的数字，也是中世纪以后才引入的。后来又引入了负数、分数、无理数。但这些数字都没有跳出实数轴，是一维的。在当时人们的观念里$x^2\ge0$，但随着实践的进一步加深，在解方程的过程中发现了$x^2=-1$这么一个怪物。起初人们不理解，认为这样">
+<meta name="twitter:image" content="http://yoursite.com/complex-rotation.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/28/四元数/"/>
+
+  <title> 四元数 | 陈思录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?c776fbdf48cacab663b4a9f6874466db";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">陈思录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Stay Foolish, Stay Hungry</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                四元数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-28T15:52:21+08:00" content="2016-10-28">
+              2016-10-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/28/四元数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/28/四元数/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="四元数的引入"><a href="#四元数的引入" class="headerlink" title="四元数的引入"></a>四元数的引入</h3><p>一切都要从数系的扩充开始。人们最开始使用数字，是从正整数开始，也就是1,2,3……。因为它符合人们的思维习惯，简单，容易理解。0这个我们看似理所当然的数字，也是中世纪以后才引入的。后来又引入了负数、分数、无理数。但这些数字都没有跳出实数轴，是一维的。在当时人们的观念里$x^2\ge0$，但随着实践的进一步加深，在解方程的过程中发现了$x^2=-1$这么一个怪物。起初人们不理解，认为这样的根是不存在的。后来，为了使计算过程能够继续下去，有数学家引入字母$i$来表示这样的数，也就是现在称之为的虚数。$i$是英文单词imaginary的首字母，意思是虚构的、假想的。就这样数系进一步扩充到了虚数。</p>
+<p>但问题是，实数轴上没有虚数的位置。很多数学家都在努力寻找虚数的位置和意义。后来发现如果将虚数轴垂直于实数轴，就可以将数系推广到二维平面，用于处理二维空间的量。数学表示为$a+bi$，称之为复数。后来发现非常好使。像我们初中学力学的时候用向量来处理力的分解问题，其实这事儿完全可以用复数来解决。除此以外，复数还有一个绝技，那就是用来处理二维向量的旋转。复数$a+bi$不是$2＋3$意义上的一个真正的和，加号的使用是历史的偶然，而$bi$不能加到$a$上去。复数$a+bi$只不过是实数的有序数对$(a,b)$。感觉是不是和向量很像。下面举例说明复数是如何进行向量旋转的。</p>
+<p>设一个向量为$(0,1)$，用复数表示为$1+0*i$，将其逆时针旋转45°。只需将其乘以$\frac{\sqrt{2}}{2}(1+i)$即可，如下图：</p>
+<p> <img src="complex-rotation.png" alt="complex-rotation"></p>
+<p>将向量$(\frac{\sqrt{2}}{2},\frac{\sqrt{2}}{2})$逆时针旋转90°。首先构造复数$\frac{\sqrt{2}}{2}(1+i)$，然后将其乘以$i$，如下：<br>$$<br>\frac{\sqrt{2}}{2}(1+i)*i=-\frac{\sqrt{2}}{2}(1-i)<br>$$</p>
+<p>见上图，得到$(\frac{\sqrt{2}}{2},\frac{\sqrt{2}}{2})$旋转90°后的向量$(-\frac{\sqrt{2}}{2},\frac{\sqrt{2}}{2})$。</p>
+<p>既然复数处理向量这么好使，那么三维空间存不存在对应的数？这就是当初很多数学家寻找四元数的原因。后来哈密尔顿（Hamilton）胜出，成了四元数的发现者。为了纪念他，四元数集用$\mathbf{H}$表示。</p>
+<h3 id="四元数定义"><a href="#四元数定义" class="headerlink" title="四元数定义"></a>四元数定义</h3><p>由一个实部和三个虚部组成，如下：<br>$$<br>q = s +xi +yj +zk\ \ \ \ \  s,x,y,z ∈ R<br>$$<br>其中，<br>$$<br>i^2 = j^2 = k^2 = ijk = −1\\<br>ij = k, jk = i, ki = j\\<br>ji = −k, kj = −i, ik = −j<br>$$<br>令<br>$$<br>\mathbf{v}=xi+yj+zk<br>$$<br>四元数可以被表示为，<br>$$<br>q=[s,\mathbf{v}]\ \ \ \ s,x,y,z\in{R}<br>$$</p>
+<h3 id="旋转三维向量"><a href="#旋转三维向量" class="headerlink" title="旋转三维向量"></a>旋转三维向量</h3><h4 id="绕任意轴的旋转公式"><a href="#绕任意轴的旋转公式" class="headerlink" title="绕任意轴的旋转公式"></a>绕任意轴的旋转公式</h4><p>向量$\mathbf{v}$绕旋转轴$\mathbf{n}$旋转$\theta$后至$\mathbf{v}’$。如下图：</p>
+<p> <img src="rotating_a_vector_about_an_arbitrary_axis.png" alt="rotating_a_vector_about_an_arbitrary_axis"></p>
+<p>其中：<br>1、向量$\mathbf{v}=\mathbf{v}_\parallel+\mathbf{v}_\perp$。其中$\mathbf{v}_\parallel$平行于旋转轴$\mathbf{n}$，$\mathbf{v}_\perp$垂直于旋转轴$\mathbf{n}$。<br>2、$\mathbf{v}’_\perp$为$\mathbf{v}_\perp$旋转$\theta$后的向量，二者长度相等。<br>3、$\mathbf{w}=\mathbf{n}\times\mathbf{v}_\perp$。</p>
+<p>我们的目的是用$\mathbf{v}$、$\mathbf{n}$、$\theta$来表示$\mathbf{v}’$。先找出各个量之间的关系:</p>
+<p>1、$\mathbf{v}_\parallel$为$\mathbf{v}$在$\mathbf{n}$上的投影，所以有：<br>$$<br>\mathbf{v}_\parallel=(\mathbf{n}\cdot\mathbf{v})\mathbf{n}<br>$$<br>2、$\mathbf{v}_\perp$<br>$$<br>\begin{align}<br>\mathbf{v}_\perp&amp;=\mathbf{v}-\mathbf{v}_\parallel\\<br>&amp;=\mathbf{v}-(\mathbf{n}\cdot\mathbf{v})\mathbf{n}\\<br>\end{align}<br>$$</p>
+<p>3、$\mathbf{w}$<br>$$<br>\begin{align}<br>\mathbf{w}&amp;=\mathbf{n}\times\mathbf{v}_\perp\\<br>&amp;=\mathbf{n}\times(\mathbf{v}-(\mathbf{n}\cdot\mathbf{v})\mathbf{n})\\<br>&amp;=\mathbf{n}\times\mathbf{v}<br>\end{align}<br>$$</p>
+<p>4、$\mathbf{v}’_\perp$<br>此处$\theta\gt{90°}$，若$\theta\lt{90°}$更好理解。<br>$$<br>\begin{align}<br>\mathbf{v}’_\perp&amp;=\cos\theta\mathbf{v}_\perp+\sin\theta\mathbf{w}\\<br>&amp;=\cos\theta(\mathbf{v}-(\mathbf{n}\cdot\mathbf{v})\mathbf{n})+\sin\theta(\mathbf{n}\times\mathbf{v})\\<br>\end{align}<br>$$<br>从而有：<br>$$<br>\begin{align}<br>\mathbf{v}’&amp;=\mathbf{v}_\perp+\mathbf{v}_\parallel\\<br>&amp;=\cos\theta(\mathbf{v}-(\mathbf{n}\cdot\mathbf{v})\mathbf{n})+\sin\theta(\mathbf{n}\times\mathbf{v})+(\mathbf{n}\cdot\mathbf{v})\mathbf{n}<br>\end{align}<br>$$</p>
+<h4 id="四元数旋转"><a href="#四元数旋转" class="headerlink" title="四元数旋转"></a>四元数旋转</h4><p>设被旋转向量为$p$，构造纯四元数如下：<br>$$<br>p=[0,\mathbf{p}]<br>$$<br>设单位模长（只做旋转变换）四元数为：<br>$$<br>q=[s,\lambda\mathbf{\hat{v}}]<br>$$<br>其中$s^2+\lambda^2=1$。</p>
+<p>其逆：<br>$$<br>q^{-1}=[s,-\lambda\mathbf{\hat{v}}]<br>$$<br>进行旋转运算：<br>$$<br>qpq^{-1}=[0,2\lambda^2(\mathbf{\hat{v}}\cdot\mathbf{p})\mathbf{\hat{v}}+(s^2-\lambda^2)\mathbf{p}+2\lambda{s}\mathbf{\hat{v}}\times\mathbf{p}]<br>$$<br>设$s=\cos\frac{1}{2}\theta$、$\lambda=\sin\frac{1}{2}\theta$，即四元数$q=\left[\cos\frac{1}{2}\theta,\sin\frac{1}{2}\theta\mathbf{\hat{v}}\right]$，上式变为：<br>$$<br>qpq^{-1}=[0,(1-\cos\theta)(\mathbf{\hat{v}}\cdot\mathbf{p})\mathbf{\hat{v}}+\cos\theta\mathbf{p}+\sin\theta\mathbf{\hat{v}}\times\mathbf{p}]<br>$$<br>由绕任意轴的旋转公式有：<br>$$<br>\begin{align}<br>\mathbf{v}’&amp;=\mathbf{v}_\perp+\mathbf{v}_\parallel\\<br>&amp;=\cos\theta(\mathbf{v}-(\mathbf{n}\cdot\mathbf{v})\mathbf{n})+\sin\theta(\mathbf{n}\times\mathbf{v})+(\mathbf{n}\cdot\mathbf{v})\mathbf{n}<br>\end{align}<br>$$</p>
+<p>用$\mathbf{n}$代替$\mathbf{\hat{v}}$，$\mathbf{v}$代替$\mathbf{p}$，有：<br>$$<br>\begin{align}<br>qpq^{-1}&amp;=[0,(1-\cos\theta)(\mathbf{\hat{v}}\cdot\mathbf{p})\mathbf{\hat{v}}+\cos\theta\mathbf{p}+\sin\theta\mathbf{\hat{v}}\times\mathbf{p}]\\<br>&amp;=[0,\cos\theta(\mathbf{v}-(\mathbf{n}\cdot\mathbf{v})\mathbf{n})+\sin\theta(\mathbf{n}\times\mathbf{v})+(\mathbf{n}\cdot\mathbf{v}])\mathbf{n}<br>\end{align}<br>$$<br>故，可以用四元数$q$，通过$qpq^{-1}$运算，将纯四元数$p$中向量$\mathbf{p}$绕$q$中$\mathbf{\hat{v}}$轴旋转$\theta$°。</p>
+<h3 id="四元数构造"><a href="#四元数构造" class="headerlink" title="四元数构造"></a>四元数构造</h3><h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><p>设两个向量$\vec{u}=[u_x,u_y,u_z]$、$\vec{v}=[v_x,v_y,v_z]$，如下图：</p>
+<p> <img src="maths-rotation.png" alt="maths-rotation"></p>
+<p>如何构造四元数$q$，使得$\vec{u}$旋转至与$\vec{v}$重合？</p>
+<h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>为了达到这一目的，需要解决连个问题，一个是旋转轴，即围绕着谁转的问题。一个是旋转角度，即旋转多少的问题。有了旋转轴和旋转角度，就可以构造四元数。为了方便处理，取垂直于$\vec{u}$和$\vec{v}$的向量$\vec{w}$为旋转轴，旋转角度为$\theta$，如上图。所需四元数为：<br>$$q=\left[\cos\frac{1}{2}\theta,\sin\frac{1}{2}\theta\vec{w}\right]$$</p>
+<p>于是问题转化为如何通过向量$\vec{u}$和$\vec{v}$表示$\vec{w}$和$\theta$。</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>由叉乘的性质可知，两个向量的叉乘，结果仍为向量，且与二者垂直。由此，可以求取旋转轴如下：<br>$$\vec{w}=\vec{u}\times\vec{v}=\left[(u_y\cdot{v_z}-u_z\cdot{v_y}), (u_z\cdot{v_x}-u_x\cdot{v_z}), (u_x\cdot{v_y}-u_y\times{v_x})\right]$$</p>
+<p>由向量的点乘，<br>$$\vec{u}\cdot\vec{v}=u_x\cdot{v_x}+u_y\cdot{v_y}+u_z\cdot{v_z}=|\vec{u}||\vec{v}|\cos\theta$$<br>可得，<br>$$\cos\theta=\frac{u_x\cdot{v_x}+u_y\cdot{v_y}+u_z\cdot{v_z}}{|\vec{u}||\vec{v}|}$$</p>
+<p>由三角函数的半角公式，<br>$$\sin\frac{1}{2}\theta=\sqrt\frac{1-\cos\theta}{2}$$<br>$$\cos\frac{1}{2}\theta=\sqrt\frac{1+\cos\theta}{2}$$</p>
+<p>从而四元数求出所需四元数为：<br>$$<br>\begin{align}<br>q&amp;=\left[\cos\frac{1}{2}\theta,\sin\frac{1}{2}\theta\vec{w}\right]\\<br>&amp;=\left[\sqrt\frac{1+\cos\theta}{2},\sqrt\frac{1-\cos\theta}{2}\\<br>\left((u_y\cdot{v_z}-u_z\cdot{v_y})i+ (u_z\cdot{v_x}-u_x\cdot{v_z})j+(u_x\cdot{v_y}-u_y\times{v_x})k\right)\right]\\<br>&amp;=\left[\sqrt\frac{1+\frac{u_x\cdot{v_x}+u_y\cdot{v_y}+u_z\cdot{v_z}}{|\vec{u}||\vec{v}|}}{2},\sqrt\frac{1-\frac{u_x\cdot{v_x}+u_y\cdot{v_y}+u_z\cdot{v_z}}{|\vec{u}||\vec{v}|}}{2}\\\<br>((u_y\cdot{v_z}-u_z\cdot{v_y})i+ (u_z\cdot{v_x}-u_x\cdot{v_z})j+(u_x\cdot{v_y}-u_y\times{v_x})k)\right]\\<br>\end{align}<br>$$</p>
+<p>这即为我们需要的结果。但实在是太繁杂了，下面看看能不能化简。</p>
+<h4 id="化简"><a href="#化简" class="headerlink" title="化简"></a>化简</h4><p>实际上，虽然上式为我们要求的四元数，但并不满足我们旋转的要求。旋转要求四元数的模为单位长。而上式不一定能满足要求。为了使四元数的模为单位长，可以将$\vec{w}$归一化以后再用来构造四元数。设$\vec{w}$归一化后的结果为$\vec{w}’$,则：<br>$$\vec{w}’=\vec{w}\cdot\frac{1}{|\vec{w}|}$$<br>其中，<br>$$|\vec{w}|=|\vec{u}||\vec{v}|\sin\theta$$</p>
+<p>重新构造四元数如下：<br>$$<br>\begin{align}<br>q&amp;=\left[\cos\frac{\theta}{2},\sin\frac{\theta}{2}\vec{w}’\right]\\<br>&amp;=\left[\cos\frac{\theta}{2},\sin\frac{\theta}{2}\frac{1}{|\vec{u}||\vec{v}|\sin\theta}\vec{w}\right]\\<br>&amp;=\left[\cos\frac{\theta}{2},\sin\frac{\theta}{2}\frac{1}{|\vec{u}||\vec{v}|2\sin\frac{\theta}{2}\cos\frac{\theta}{2}}\vec{w}\right]\\<br>&amp;=\left[\cos\frac{\theta}{2},\frac{1}{|\vec{u}||\vec{v}|2\cos\frac{\theta}{2}}\vec{w}\right]\\<br>\end{align}<br>$$<br>四元数乘以一个标量，不改变四元数的旋转特性，故可设$q’=(|\vec{u}||\vec{v}|2\cos\frac{\theta}{2})q$，有：<br>$$<br>\begin{align}<br>q’&amp;=(|\vec{u}||\vec{v}|2\cos\frac{\theta}{2})q\\<br>&amp;=\left[|\vec{u}||\vec{v}|2\cos\frac{\theta}{2}\cos\frac{\theta}{2},\vec{w}\right]\\<br>&amp;=\left[|\vec{u}||\vec{v}|(1+\cos\theta),\vec{w}\right]\\<br>&amp;=\left[|\vec{u}||\vec{v}|+|\vec{u}||\vec{v}|\cos\theta),\vec{w}\right]\\<br>&amp;=\left[|\vec{u}||\vec{v}|+\vec{u}\cdot\vec{v}),\vec{w}\right]\\<br>\end{align}<br>$$</p>
+<p>将$q’$进行标准化处理后即可用于旋转$\vec{u}$、$\vec{v}$，使二者重合。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://lolengine.net/blog/2013/09/18/beautiful-maths-quaternion-from-vectors" target="_blank" rel="external">Beautiful maths simplification: quaternion from two vectors</a><br><a href="http://www.gamedev.net/topic/429507-finding-the-quaternion-betwee-two-vectors/" target="_blank" rel="external">Finding the Quaternion Betwee Two Vectors</a><br><a href="http://stackoverflow.com/questions/1171849/finding-quaternion-representing-the-rotation-from-one-vector-to-another" target="_blank" rel="external">Finding quaternion representing the rotation from one vector to another</a></p>
+<p><a href="http://www.doc88.com/p-0953990139295.html" target="_blank" rel="external">四元数的发现及其意义</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数学/" rel="tag">#数学</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/26/欧拉角/" rel="next" title="欧拉角">
+                <i class="fa fa-chevron-left"></i> 欧拉角
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/28/四元数/"
+           data-title="四元数" data-url="http://yoursite.com/2016/10/28/四元数/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="chenbinpeng" />
+          <p class="site-author-name" itemprop="name">chenbinpeng</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#四元数的引入"><span class="nav-number">1.</span> <span class="nav-text">四元数的引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四元数定义"><span class="nav-number">2.</span> <span class="nav-text">四元数定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转三维向量"><span class="nav-number">3.</span> <span class="nav-text">旋转三维向量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#绕任意轴的旋转公式"><span class="nav-number">3.1.</span> <span class="nav-text">绕任意轴的旋转公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四元数旋转"><span class="nav-number">3.2.</span> <span class="nav-text">四元数旋转</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四元数构造"><span class="nav-number">4.</span> <span class="nav-text">四元数构造</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目的"><span class="nav-number">4.1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析"><span class="nav-number">4.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">4.3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#化简"><span class="nav-number">4.4.</span> <span class="nav-text">化简</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chenbinpeng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenbinpeng"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
